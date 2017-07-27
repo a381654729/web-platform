@@ -20,39 +20,42 @@ public class PersonRespositoryImpl implements PersonRepository {
 	}
 
 	@Override
-	public Person load(Long id) {
+	public Person load(final Long id) {
 		return (Person) getCurrentSession().load(Person.class, id);
 	}
 
 	@Override
-	public Person get(Long id) {
+	public Person get(final Long id) {
 		return (Person) getCurrentSession().get(Person.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Person> findAll() {
-		return null;
+		return getCurrentSession().createCriteria(Person.class).list();
 	}
 
 	@Override
-	public void persist(Person entity) {
+	public void persist(final Person entity) {
 		getCurrentSession().persist(entity);
 	}
 
 	@Override
-	public Long save(Person entity) {
+	public Long save(final Person entity) {
 		return (Long) getCurrentSession().save(entity);
 	}
 
 	@Override
-	public void saveOrUpdate(Person entity) {
+	public void saveOrUpdate(final Person entity) {
 		getCurrentSession().saveOrUpdate(entity);
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(final Long id) {
 		final Person person = load(id);
-		getCurrentSession().delete(person);
+		final Session currentSession = getCurrentSession();
+		currentSession.delete(person);
+		currentSession.flush();
 	}
 
 	@Override

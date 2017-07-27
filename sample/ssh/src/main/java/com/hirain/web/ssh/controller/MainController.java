@@ -20,4 +20,10 @@ public class MainController {
 		personService.savePerson();
 		return "success!";
 	}
+
+	@RequestMapping(value = "test", method = RequestMethod.GET)
+	@ResponseBody
+	public String test() {
+		return "test";
+	}
 }
