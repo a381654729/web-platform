@@ -23,10 +23,21 @@
   	from t_user
   	where username=#{username,jdbcType=VARCHAR}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectAll" resultMap="UserResultMap1">
   	select 
   	<include refid="Base_Column_List"/>
   	from t_user
+  </select>
+  <resultMap id="UserResultMap1" type="com.hirain.web.ssm.entity.User">
+  	<id property="id" column="id" jdbcType="BIGINT"></id>
+  	<result column="username" jdbcType="VARCHAR" property="username"/>
+  	<result column="password" jdbcType="VARCHAR" property="password"/>
+  	<result column="address" jdbcType="VARCHAR" property="address"/>
+  	<result column="email" jdbcType="VARCHAR" property="email"/>
+  	<collection property="roleList" ofType="com.hirain.web.ssm.entity.Role" column="id" select="selectRole1"></collection>
+  </resultMap>
+  <select id="selectRole1" parameterType="java.lang.Long" resultType="com.hirain.web.ssm.entity.Role">
+  	select * from t_role where id in (select role_id from t_user_role where user_id=#{id,jdbcType=BIGINT})
   </select>
   <select id="selectWithRoles" parameterType="java.lang.String" resultMap="UserResultMap">
   	select * from t_user where username=#{username,jdbcType=VARCHAR}
@@ -47,13 +58,9 @@
   	<result column="rolename" jdbcType="VARCHAR" property="rolename"></result>
   	<collection property="permissionList" ofType="com.hirain.web.entity.Permission" column="id" select="selectPermission"></collection>
   </resultMap>
-  <select id="selectPermission" parameterType="java.lang.Long" resultMap="PermissionResultMap">
+  <select id="selectPermission" parameterType="java.lang.Long" resultType="com.hirain.web.ssm.entity.Permission">
   	select * from t_permission where id in (select permission_id from t_role_permission where role_id=#{id,jdbcType=BIGINT})
   </select>
-  <resultMap id="PermissionResultMap" type="com.hirain.web.ssm.entity.Permission">
-  	<id property="id" column="id" jdbcType="BIGINT"></id>
-  	<result column="permissionname" jdbcType="VARCHAR" property="permissionname"></result>
-  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from t_user
     where id = #{id,jdbcType=BIGINT}

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 
@@ -17,7 +18,7 @@
                     </a>
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-user"></i> 个人信息</a></li>
+                            <li><a href="#"><i class="fa fa-user"></i> <shiro:principal/></a></li>
                             <li><a href="logout"><i class="fa fa-sign-out"></i> 退出</a></li>
                         </ul>
                     </div>
