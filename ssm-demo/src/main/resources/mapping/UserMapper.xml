@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hirain.web.ssm.mapping.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.hirain.web.ssm.entity.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username, password, address, email
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from t_user
+  	where username=#{username,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from t_user
+  </select>
+  <select id="selectWithRoles" parameterType="java.lang.String" resultMap="UserResultMap">
+  	select * from t_user where username=#{username,jdbcType=VARCHAR}
+  </select>
+  <resultMap id="UserResultMap" type="com.hirain.web.ssm.entity.User">
+  	<id property="id" column="id" jdbcType="BIGINT"></id>
+  	<result column="username" jdbcType="VARCHAR" property="username"/>
+  	<result column="password" jdbcType="VARCHAR" property="password"/>
+  	<result column="address" jdbcType="VARCHAR" property="address"/>
+  	<result column="email" jdbcType="VARCHAR" property="email"/>
+  	<collection property="roleList" ofType="com.hirain.web.ssm.entity.Role" column="id" select="selectRole"></collection>
+  </resultMap>
+  <select id="selectRole" parameterType="java.lang.Long" resultMap="RoleResultMap">
+  	select * from t_role where id in (select role_id from t_user_role where user_id=#{id,jdbcType=BIGINT})
+  </select>
+  <resultMap id="RoleResultMap" type="com.hirain.web.ssm.entity.Role">
+  	<id property="id" column="id" jdbcType="BIGINT"></id>
+  	<result column="rolename" jdbcType="VARCHAR" property="rolename"></result>
+  	<collection property="permissionList" ofType="com.hirain.web.entity.Permission" column="id" select="selectPermission"></collection>
+  </resultMap>
+  <select id="selectPermission" parameterType="java.lang.Long" resultMap="PermissionResultMap">
+  	select * from t_permission where id in (select permission_id from t_role_permission where role_id=#{id,jdbcType=BIGINT})
+  </select>
+  <resultMap id="PermissionResultMap" type="com.hirain.web.ssm.entity.Permission">
+  	<id property="id" column="id" jdbcType="BIGINT"></id>
+  	<result column="permissionname" jdbcType="VARCHAR" property="permissionname"></result>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hirain.web.ssm.entity.User" >
+    insert into t_user (id, username, password, 
+      address, email)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hirain.web.ssm.entity.User" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hirain.web.ssm.entity.User" >
+    update t_user
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hirain.web.ssm.entity.User" >
+    update t_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
