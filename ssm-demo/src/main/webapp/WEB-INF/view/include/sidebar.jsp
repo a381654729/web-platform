@@ -21,7 +21,7 @@
                             </a>
                         <ul class="treeview-menu">
                             <shiro:hasPermission name="query"><li id="user"><a href="user"><i class="fa fa-users"></i> 用户管理</a></li></shiro:hasPermission>
-                            <li><a href="#"><i class="fa fa-user-secret"></i> 权限管理</a></li>
+                            <shiro:hasPermission name="query"><li id="shiro"><a href="permission"><i class="fa fa-user-secret"></i> 权限管理</a></li></shiro:hasPermission>
                         </ul>
                     </li>
                     </shiro:hasRole>

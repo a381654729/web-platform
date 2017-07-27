@@ -1,5 +1,7 @@
 package com.hirain.web.ssm.mapping;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.hirain.web.ssm.entity.Role;
@@ -18,4 +20,6 @@ public interface RoleMapper {
 	int updateByPrimaryKeySelective(Role record);
 
 	int updateByPrimaryKey(Role record);
+
+	List<Role> selectAll();
 }

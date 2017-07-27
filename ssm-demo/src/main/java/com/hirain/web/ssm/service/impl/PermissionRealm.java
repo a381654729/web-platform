@@ -35,7 +35,7 @@ public class PermissionRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
 		final String loginName = (String) arg0.fromRealm(getName()).iterator().next();
-		final User user = userService.selectUser(loginName);
+		final User user = userService.selectUserWithRoles(loginName);
 		log.info("----------" + loginName + "-----------");
 		if (user != null) {
 			final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();

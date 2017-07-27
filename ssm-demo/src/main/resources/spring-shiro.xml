@@ -29,9 +29,9 @@
 		<property name="securityManager" ref="securityManager"/>
 		<!-- 配置我们的登录请求地址 -->  
 		<property name="loginUrl" value="/login"/>
-		 <!-- 配置我们在登录页登录成功后的跳转地址，如果你访问的是非/login地址，则跳到您访问的地址 -->  
-        <property name="successUrl" value="/"/>    
-        <!-- 如果您请求的资源不再您的权限范围，则跳转到/403请求地址 -->  
+		 <!-- 配置我们在登录页登录成功后的跳转地址，如果你访问的是非/login地址，则跳到您访问的地址   -->
+        <property name="successUrl" value="/blank"/>    
+        <!-- 如果您请求的资源不再您的权限范围，则跳转到/403请求地址   -->
         <property name="unauthorizedUrl" value="/403"/> 
         
         <!-- 权限配置 -->  
