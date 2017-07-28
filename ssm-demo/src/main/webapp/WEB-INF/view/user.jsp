@@ -8,9 +8,11 @@
             <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
             <%@include file="include/include.jsp"%>
                 <link rel="stylesheet" href="css/bootstrap-table.css" type="text/css">
+                <link rel="stylesheet" href="css/select2.min.css type="text/css">
                 <script src="js/plugins/bootstrap-table.js"></script>
                 <script src="js/plugins/bootstrap-table-zh-CN.js"></script>
                 <script src="js/plugins/bootbox.js"></script>
+                <script src="js/plugins/select2.min.js"></script>
                 <title>
                     用户管理
                 </title>
@@ -227,6 +229,13 @@
                                                 <div class="form-group">
                                                     <label for="email">Email:</label>
                                                     <input type="email" class="form-control" name="email" id="userEmail" placeholder="Email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>角色配置</label>
+                                                    <select class="form-control select2" multiple="multiple">
+                                                        <option>test</option>
+                                                        <option>test2</option>
+                                                    </select>
                                                 </div>
                                             </form>
                                         </div>
