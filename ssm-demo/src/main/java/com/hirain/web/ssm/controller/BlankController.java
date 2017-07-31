@@ -20,4 +20,9 @@ public class BlankController {
 		log.info("load permission.jsp");
 		return "permission";
 	}
+
+	@RequestMapping(value = "/blank")
+	public String blank() {
+		return "blank";
+	}
 }

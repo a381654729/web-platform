@@ -2,6 +2,9 @@ package com.hirain.web.ssm.entity;
 
 import java.util.List;
 
+import org.apache.shiro.authc.credential.DefaultPasswordService;
+import org.apache.shiro.authc.credential.PasswordService;
+
 public class User {
 
 	private Long id;
@@ -15,6 +18,8 @@ public class User {
 	private String email;
 
 	private List<Role> roleList;
+
+	private final PasswordService passwordService = new DefaultPasswordService();
 
 	public Long getId() {
 		return id;
@@ -62,5 +67,10 @@ public class User {
 
 	public void setRoleList(List<Role> roleList) {
 		this.roleList = roleList;
+	}
+
+	public String encryptPassword(String password) {
+		final String encryptPassword = passwordService.encryptPassword(password);
+		return encryptPassword;
 	}
 }

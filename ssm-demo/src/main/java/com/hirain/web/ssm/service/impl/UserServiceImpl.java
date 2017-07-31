@@ -45,4 +45,14 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectWithRoles(username);
 	}
 
+	@Override
+	public void deleteRole(Long userId) {
+		userMapper.deleteRoleById(userId);
+	}
+
+	@Override
+	public User selectByPrimaryKey(Long id) {
+		return userMapper.selectByPrimaryKey(id);
+	}
+
 }

@@ -7,4 +7,6 @@ import com.hirain.web.ssm.entity.Role;
 public interface RoleService {
 
 	public List<Role> selectAll();
+
+	public void updateUserAndRole(String cname, Long userId);
 }

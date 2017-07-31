@@ -65,6 +65,10 @@
     delete from t_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
+  <delete id="deleteRoleById" parameterType="java.lang.Long">
+  	delete from t_user_role
+  	where user_id=#{id,jdbcType=BIGINT}
+  </delete>
   <insert id="insert" parameterType="com.hirain.web.ssm.entity.User" >
     insert into t_user (id, username, password, 
       address, email)

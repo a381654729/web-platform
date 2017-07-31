@@ -18,4 +18,8 @@ public interface UserService {
 
 	public User selectUserWithRoles(String username);
 
+	public void deleteRole(Long userId);
+
+	public User selectByPrimaryKey(Long id);
+
 }

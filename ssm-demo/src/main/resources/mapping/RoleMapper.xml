@@ -16,6 +16,12 @@
     from t_role
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectByCname" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from t_role
+  	where cname=#{cname,jdbcType=VARCHAR}
+  </select>
   <select id="selectAll" resultMap="BaseResultMap">
   	select
   	<include refid="Base_Column_List"/>
@@ -84,4 +90,8 @@
       description = #{description,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <insert id="insertUserAndRole">
+  	insert into t_user_role(role_id,user_id)
+  	values(#{roleId,jdbcType=BIGINT},#{userId,jdbcType=BIGINT})
+  </insert>
 </mapper>

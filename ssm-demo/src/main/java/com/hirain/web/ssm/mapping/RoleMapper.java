@@ -2,6 +2,7 @@ package com.hirain.web.ssm.mapping;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.hirain.web.ssm.entity.Role;
@@ -22,4 +23,9 @@ public interface RoleMapper {
 	int updateByPrimaryKey(Role record);
 
 	List<Role> selectAll();
+
+	Role selectByCname(String cname);
+
+	int insertUserAndRole(@Param("roleId") Long roleId, @Param("userId") Long userId);
+
 }

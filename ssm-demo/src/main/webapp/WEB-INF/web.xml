@@ -26,10 +26,12 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
 	<!-- shiro配置 -->
 	<filter>
 		<filter-name>shiroFilter</filter-name>

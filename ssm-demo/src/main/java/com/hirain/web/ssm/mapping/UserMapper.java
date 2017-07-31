@@ -26,4 +26,6 @@ public interface UserMapper {
 	int updateByPrimaryKey(User record);
 
 	List<User> selectAll();
+
+	int deleteRoleById(Long id);
 }

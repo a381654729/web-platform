@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hirain.web.ssm.entity.User;
+import com.hirain.web.ssm.service.RoleService;
 import com.hirain.web.ssm.service.UserService;
 
 import lombok.extern.apachecommons.CommonsLog;
@@ -26,6 +27,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private RoleService roleService;
+
 	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
 	public @ResponseBody List<User> list() {
 		final List<User> users = userService.selectAll();
@@ -34,16 +38,33 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public @ResponseBody Map<String, String> createUser(User user) {
+	public @ResponseBody Map<String, String> createUser(User user, String role) {
 		final Map<String, String> map = new HashMap<>();
+		final String password = user.getPassword();
 		if (user.getId() == null) {
+			if (password != null || password != "") {
+				log.info(password);
+				user.setPassword(user.encryptPassword(password));
+			}
 			userService.createUser(user);
 			log.info("createUser");
 			map.put("operate", "create");
 		} else {
+			if (!password.equals(null) && !password.equals("")) {
+				log.info(password);
+				user.setPassword(user.encryptPassword(password));
+			} else {
+				final User selectUser = userService.selectByPrimaryKey(user.getId());
+				user.setPassword(selectUser.getPassword());
+			}
 			userService.updateUser(user);
 			log.info("updateUser");
 			map.put("operate", "update");
+		}
+		final User currentUser = userService.selectUser(user.getUsername());
+		userService.deleteRole(currentUser.getId());
+		if (role != null || role != "") {
+			roleService.updateUserAndRole(role, currentUser.getId());
 		}
 		map.put("operateTarget", user.getUsername());
 		return map;

@@ -8,11 +8,11 @@
             <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
             <%@include file="include/include.jsp"%>
                 <link rel="stylesheet" href="css/bootstrap-table.css" type="text/css">
-                <link rel="stylesheet" href="css/select2.min.css type="text/css">
                 <script src="js/plugins/bootstrap-table.js"></script>
                 <script src="js/plugins/bootstrap-table-zh-CN.js"></script>
                 <script src="js/plugins/bootbox.js"></script>
-                <script src="js/plugins/select2.min.js"></script>
+                
+                
                 <title>
                     用户管理
                 </title>
@@ -23,6 +23,7 @@
                         tableInit();
                         $("#newUserModal").on("hidden.bs.modal", function () {
                             $("#newForm input").val("");
+                            $("#role").empty();
                         });
                     });
                     function tableInit() {
@@ -95,14 +96,34 @@
                     function load() {
                         var currentRow = getSelection()[0];
                         if (currentRow != null) {
-                            $('#newUserModal').modal('show');
+                            // $('#newUserModal').modal('show');
+                            openDialog();
                             $("#userId").val(currentRow.id);
                             $('#userName').val(currentRow.username);
                             $('#userAddress').val(currentRow.address);
                             $('#userEmail').val(currentRow.email);
+							$('#role').text(currentRow.roleList[0]);
                         } else {
                             bootbox.alert("请选择至少一个用户。");
                         }
+                    }
+
+                    function openDialog(){
+                        // $('#newUserModal').modal('show');
+                        $('#role').empty();
+                        $('#role').append("<option></option>");
+                        $.ajax({
+                            url:'role/getRole',
+                            type:'get',
+                            success:function(rdata){
+                                if(rdata.length>0){
+                                    $.each(rdata,function(i,val){
+                                        $('#role').append("<option>"+val.cname+"</option>");
+                                    });
+                                    $('#newUserModal').modal('show');
+                                }
+                            }
+                        });
                     }
 
                     function getSelection() {
@@ -185,7 +206,7 @@
                                             <div class="box-body">
                                                 <div class="text-center">
                                                     <shiro:hasPermission name="add">
-                                                        <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#newUserModal">新增</button>
+                                                        <button type="button" class="btn btn-primary btn-flat"  onclick="openDialog()">新增</button>
                                                     </shiro:hasPermission>
                                                     <shiro:hasPermission name="update">
                                                         <button type="button" class="btn btn-warning btn-flat" onclick="load()">修改</button>
@@ -223,6 +244,10 @@
                                                     <input type="text" class="form-control" name="username" id="userName" placeholder="请输入姓名">
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="password">密码</label>
+                                                    <input type="password" class="form-control" name="password" id="password" autocomplete = "new-password" placeholder="请输入密码">
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="address">Address:</label>
                                                     <input type="text" class="form-control" name="address" id="userAddress" placeholder="住址">
                                                 </div>
@@ -230,13 +255,13 @@
                                                     <label for="email">Email:</label>
                                                     <input type="email" class="form-control" name="email" id="userEmail" placeholder="Email">
                                                 </div>
-                                                <div class="form-group">
+                                                 <div class="form-group">
                                                     <label>角色配置</label>
-                                                    <select class="form-control select2" multiple="multiple">
+                                                    <select id="role" name="role" class="form-control">
                                                         <option>test</option>
                                                         <option>test2</option>
                                                     </select>
-                                                </div>
+                                                </div> 
                                             </form>
                                         </div>
                                         <div class="modal-footer">

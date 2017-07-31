@@ -38,11 +38,9 @@
         <property name="filterChainDefinitions">
         	<value>
         		<!-- anon表示此地址不需要任何权限即可访问 -->  
-        		/static/**=anon
-        		/WEB-INF/view/js/*=anon
-        		/WEB-INF/view/css/*=anon
-        		/WEB-INF/view/img/*=anon
-        		/WEB-INF/view/fonts/*=anon
+        		/WEB-INF/view/js/**=anon
+        		/WEB-INF/view/css/**=anon
+        		/WEB-INF/view/fonts/**=anon
                 /** = authc  
         	</value>
         </property>

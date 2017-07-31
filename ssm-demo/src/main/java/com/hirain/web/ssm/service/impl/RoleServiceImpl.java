@@ -20,4 +20,12 @@ public class RoleServiceImpl implements RoleService {
 		return roleDao.selectAll();
 	}
 
+	@Override
+	public void updateUserAndRole(String cname, Long userId) {
+		final Role role = roleDao.selectByCname(cname);
+		if (role != null) {
+			roleDao.insertUserAndRole(role.getId(), userId);
+		}
+	}
+
 }
