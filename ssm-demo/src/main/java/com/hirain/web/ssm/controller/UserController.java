@@ -75,6 +75,7 @@ public class UserController {
 	public @ResponseBody Map<String, String> deleteUser(Long id, HttpServletRequest request) {
 		final Map<String, String> map = new HashMap<>();
 		userService.deleteUser(id);
+		userService.deleteRole(id);
 		log.info("deleteUser");
 		map.put("result", "success");
 		return map;

@@ -25,4 +25,28 @@ public class BlankController {
 	public String blank() {
 		return "blank";
 	}
+
+	@RequestMapping(value = "/chart")
+	public String chart() {
+		log.info("load chart.jsp");
+		return "chart";
+	}
+
+	@RequestMapping(value = "/ontime")
+	public String ontime() {
+		log.info("load ontime.jsp");
+		return "ontime";
+	}
+
+	@RequestMapping(value = "/tree")
+	public String tree() {
+		log.info("load tree.jsp");
+		return "tree";
+	}
+
+	@RequestMapping(value = "/dchart")
+	public String dchart() {
+		log.info("load dchart.jsp");
+		return "dchart";
+	}
 }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hirain.web.ssm.mapping.RealtimeDataMapper" >
+  <resultMap id="BaseResultMap" type="com.hirain.web.ssm.entity.RealtimeData" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="time" property="time" jdbcType="VARCHAR"/>
+    <result column="value" property="value" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    time, value
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_date
+    where time = #{time,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByDate" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List" /> from t_date
+  	where time between #{date1,jdbcType=VARCHAR} and #{date2,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_date
+    where time = #{time,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hirain.web.ssm.entity.RealtimeData" >
+    insert into t_date (time, value)
+    values (#{time,jdbcType=VARCHAR}, #{value,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hirain.web.ssm.entity.RealtimeData" >
+    insert into t_date
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="value != null" >
+        value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hirain.web.ssm.entity.RealtimeData" >
+    update t_date
+    <set >
+      <if test="value != null" >
+        value = #{value,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where time = #{time,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hirain.web.ssm.entity.RealtimeData" >
+    update t_date
+    set value = #{value,jdbcType=DOUBLE}
+    where time = #{time,jdbcType=VARCHAR}
+  </update>
+</mapper>

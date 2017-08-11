@@ -33,15 +33,27 @@
                                 </span>
                             </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-balance-scale"></i> 模型计算</a></li>
-                            <li><a href="#"><i class="fa  fa-cubes"></i> 工况计算</a></li>
-                            <li><a href="#"><i class="fa fa-database"></i> 数据管理</a></li>
+                            <li id="ontime"><a href="ontime"><i class="fa fa-balance-scale"></i> 实时监控</a></li>
+                            <li id="tree"><a href="tree"><i class="fa fa-tree"></i> 树形结构</a></li>
+                            <!-- <li><a href="#"><i class="fa fa-database"></i> 数据管理</a></li> -->
                         </ul>
                     </li>
-                    <li class="treeview">
-                        <a href="#">
+                    <!-- <li id="chart">
+                        <a href="chart">
                                 <i class="fa fa-area-chart"></i> <span>图形展示</span>
                             </a>
+                    </li> -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-area-chart"></i> <span>图形展示</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="chart"><a href="chart"><i class="fa fa-pie-chart"></i> 基本图形</a></li>
+                            <li id="dchart"><a href="dchart"><i class="fa fa-line-chart"></i> 动态添加</a></li>
+                        </ul>
                     </li>
                 </ul>
             </section>

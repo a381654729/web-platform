@@ -12,6 +12,10 @@ public interface RoleMapper {
 
 	int deleteByPrimaryKey(Long id);
 
+	int deletePermissionOfRole(Long id);
+
+	int deleteRoleOfUser(Long id);
+
 	int insert(Role record);
 
 	int insertSelective(Role record);
@@ -26,6 +30,10 @@ public interface RoleMapper {
 
 	Role selectByCname(String cname);
 
+	List<Long> selectPermissionOfRole(Long id);
+
 	int insertUserAndRole(@Param("roleId") Long roleId, @Param("userId") Long userId);
 
+	int insertRoleAndPermission(@Param("roleId") Long roleId,
+			@Param("permissionId") Long permissionId);
 }

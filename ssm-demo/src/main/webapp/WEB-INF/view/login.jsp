@@ -11,8 +11,8 @@
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/ionicons.min.css">
     <link rel="stylesheet" type="text/css" href="css/AdminLTE.min.css">
-    <link rel="stylesheet" type="text/css" href="css/_all-skins.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- <link rel="stylesheet" type="text/css" href="css/_all-skins.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
   </head>
 
   <body class="hold-transition login-page">
@@ -26,11 +26,11 @@
 
         <form action="login" method="post">
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" id="username" name="username" placeholder="用户名">
+            <input type="text" class="form-control" id="username" name="username" placeholder="用户名" autofocus required>
             <span class="fa fa-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" id="password" name="password" autocomplete = "new-password" placeholder="密码">
+            <input type="password" class="form-control" id="password" name="password" autocomplete = "new-password" placeholder="密码" required>
             <span class="fa fa-lock form-control-feedback"></span>
           </div>
           <div class="row">

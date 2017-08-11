@@ -1,5 +1,7 @@
 package com.hirain.web.ssm.mapping;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.hirain.web.ssm.entity.Permission;
@@ -18,4 +20,8 @@ public interface PermissionMapper {
 	int updateByPrimaryKeySelective(Permission record);
 
 	int updateByPrimaryKey(Permission record);
+
+	List<Permission> selectAll();
+
+	int deletePermissionByRole(Long roleId);
 }

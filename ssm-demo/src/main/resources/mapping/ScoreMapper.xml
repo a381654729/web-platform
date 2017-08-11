@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hirain.web.ssm.mapping.ScoreMapper" >
+  <resultMap id="BaseResultMap" type="com.hirain.web.ssm.entity.UserScore" >
+    <id column="username" property="username" jdbcType="VARCHAR" />
+    <id column="score" property="score" jdbcType="BIGINT" />
+  </resultMap>
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select * from t_score
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.hirain.web.ssm.entity.UserScore" >
+    delete from t_score
+    where username = #{username,jdbcType=VARCHAR}
+      and score = #{score,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hirain.web.ssm.entity.UserScore" >
+    insert into t_score (username, score)
+    values (#{username,jdbcType=VARCHAR}, #{score,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hirain.web.ssm.entity.UserScore" >
+    insert into t_score
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

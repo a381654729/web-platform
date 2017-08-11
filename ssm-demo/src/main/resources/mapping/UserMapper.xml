@@ -27,6 +27,7 @@
   	select 
   	<include refid="Base_Column_List"/>
   	from t_user
+  	where id != 1
   </select>
   <resultMap id="UserResultMap1" type="com.hirain.web.ssm.entity.User">
   	<id property="id" column="id" jdbcType="BIGINT"></id>

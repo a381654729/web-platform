@@ -5,27 +5,38 @@
 
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+            <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+                name="viewport">
             <%@include file="include/include.jsp"%>
                 <link rel="stylesheet" href="css/bootstrap-table.css" type="text/css">
                 <script src="js/plugins/bootstrap-table.js"></script>
                 <script src="js/plugins/bootstrap-table-zh-CN.js"></script>
                 <script src="js/plugins/bootbox.js"></script>
-                
-                
+
+
                 <title>
                     用户管理
                 </title>
+                <style type="text/css">
+                    
+                </style>
                 <script>
                     $(function () {
                         $("#user").addClass("active");
                         $("#user").parent().parent().addClass("active");
+                        $("#user").html('<a href="javascript:void(0)"><i class="fa fa-users"></i> 用户管理</a>');
                         tableInit();
                         $("#newUserModal").on("hidden.bs.modal", function () {
                             $("#newForm input").val("");
                             $("#role").empty();
                         });
+
+                        
                     });
+
+                    function toTop() {
+                        window.scroll(0, 0);
+                    }
                     function tableInit() {
                         $('#tb_user').bootstrapTable({
                             url: 'user/getUser',
@@ -102,23 +113,23 @@
                             $('#userName').val(currentRow.username);
                             $('#userAddress').val(currentRow.address);
                             $('#userEmail').val(currentRow.email);
-							$('#role').text(currentRow.roleList[0]);
+                            $('#role').text(currentRow.roleList[0]);
                         } else {
                             bootbox.alert("请选择至少一个用户。");
                         }
                     }
 
-                    function openDialog(){
+                    function openDialog() {
                         // $('#newUserModal').modal('show');
                         $('#role').empty();
                         $('#role').append("<option></option>");
                         $.ajax({
-                            url:'role/getRole',
-                            type:'get',
-                            success:function(rdata){
-                                if(rdata.length>0){
-                                    $.each(rdata,function(i,val){
-                                        $('#role').append("<option>"+val.cname+"</option>");
+                            url: 'role/getRole',
+                            type: 'get',
+                            success: function (rdata) {
+                                if (rdata.length > 0) {
+                                    $.each(rdata, function (i, val) {
+                                        $('#role').append("<option>" + val.cname + "</option>");
                                     });
                                     $('#newUserModal').modal('show');
                                 }
@@ -206,7 +217,7 @@
                                             <div class="box-body">
                                                 <div class="text-center">
                                                     <shiro:hasPermission name="add">
-                                                        <button type="button" class="btn btn-primary btn-flat"  onclick="openDialog()">新增</button>
+                                                        <button type="button" class="btn btn-primary btn-flat" onclick="openDialog()">新增</button>
                                                     </shiro:hasPermission>
                                                     <shiro:hasPermission name="update">
                                                         <button type="button" class="btn btn-warning btn-flat" onclick="load()">修改</button>
@@ -241,11 +252,12 @@
                                                 <input type="text" class="form-control" name="id" id="userId" style="display: none">
                                                 <div class="form-group">
                                                     <label for="name">Name:</label>
-                                                    <input type="text" class="form-control" name="username" id="userName" placeholder="请输入姓名">
+                                                    <input type="text" class="form-control" name="username" id="userName" placeholder="请输入姓名" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="password">密码</label>
-                                                    <input type="password" class="form-control" name="password" id="password" autocomplete = "new-password" placeholder="请输入密码">
+                                                    <input type="password" class="form-control" name="password" id="password" autocomplete="new-password"
+                                                        placeholder="请输入密码">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="address">Address:</label>
@@ -255,13 +267,13 @@
                                                     <label for="email">Email:</label>
                                                     <input type="email" class="form-control" name="email" id="userEmail" placeholder="Email">
                                                 </div>
-                                                 <div class="form-group">
+                                                <div class="form-group">
                                                     <label>角色配置</label>
                                                     <select id="role" name="role" class="form-control">
                                                         <option>test</option>
                                                         <option>test2</option>
                                                     </select>
-                                                </div> 
+                                                </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -271,6 +283,7 @@
                                     </div>
                                 </div>
                             </div>
+            </div>
             </div>
         </body>
 
