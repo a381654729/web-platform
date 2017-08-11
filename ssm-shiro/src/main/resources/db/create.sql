@@ -3,13 +3,13 @@ use test;
 create table t_user(
 id bigint not null auto_increment,
 username varchar(50),
-password varchar(50),
+password varchar(100),
 primary key(id)
 )ENGINE=InnoDB default charset=utf8;
 
-insert into t_user values(1,'tom','000000');
-insert into t_user values(2,'jack','000000');
-insert into t_user values(3,'rose','000000');
+insert into t_user values(1,'tom','$shiro1$SHA-256$500000$yQpBM/uQHF5WJyPrvofKww==$3tQ2lCRd5QeU4i0eLXjHOjp6LdM+hI0rgE7QKvWdK6w=');
+insert into t_user values(2,'jack','$shiro1$SHA-256$500000$yQpBM/uQHF5WJyPrvofKww==$3tQ2lCRd5QeU4i0eLXjHOjp6LdM+hI0rgE7QKvWdK6w=');
+insert into t_user values(3,'rose','$shiro1$SHA-256$500000$yQpBM/uQHF5WJyPrvofKww==$3tQ2lCRd5QeU4i0eLXjHOjp6LdM+hI0rgE7QKvWdK6w=');
 
 create table t_role(
 id bigint not null auto_increment,
