@@ -49,4 +49,9 @@ public class BlankController {
 		log.info("load dchart.jsp");
 		return "dchart";
 	}
+
+	@RequestMapping(value = "/map")
+	public String map() {
+		return "map";
+	}
 }
