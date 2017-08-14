@@ -1,3 +1,6 @@
+<link rel="icon" href="fonts/hirain.ico" type="image/x-icon">
+<link rel="shortcut icon" href="fonts/hirain.ico" type="image/x-icon">
+
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/ionicons.min.css">
