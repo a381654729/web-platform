@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,6 +79,54 @@ public class UserController {
 		userService.deleteRole(id);
 		log.info("deleteUser");
 		map.put("result", "success");
+		return map;
+	}
+
+	@Transactional
+	@RequestMapping(value = "/changePwd", method = RequestMethod.POST)
+	public @ResponseBody Map<String, String> changePassword(String oldpwd, String newpwd) {
+		final Map<String, String> map = new HashMap<>();
+		try {
+			final String username = (String) SecurityUtils.getSubject().getSession()
+					.getAttribute("loginName");
+			final User user = userService.selectUser(username);
+			final boolean isCorrect = user.isCorrectPassword(oldpwd);
+			if (isCorrect) {
+				user.setPassword(user.encryptPassword(newpwd));
+				userService.updateUser(user);
+				log.info("update password success");
+				map.put("result", "success");
+			} else {
+				log.info("wrong old password");
+				map.put("result", "fail");
+				map.put("msg", "原密码不正确");
+			}
+		} catch (final Exception e) {
+			log.info("update password error");
+			map.put("result", "fail");
+			map.put("msg", "修改密码出错");
+		}
+		return map;
+	}
+
+	@RequestMapping(value = "/loginUser", method = RequestMethod.POST)
+	public @ResponseBody User loginUser() {
+		final String username = (String) SecurityUtils.getSubject().getSession()
+				.getAttribute("loginName");
+		return userService.selectUser(username);
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public @ResponseBody Map<String, String> updateUser(User user) {
+		final Map<String, String> map = new HashMap<>();
+		try {
+			userService.updateUser(user);
+			map.put("result", "success");
+		} catch (final Exception e) {
+			map.put("result", "fail");
+			map.put("msg", "更新用户信息出错");
+			e.printStackTrace();
+		}
 		return map;
 	}
 }

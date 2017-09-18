@@ -22,11 +22,21 @@
   	from t_role
   	where cname=#{cname,jdbcType=VARCHAR}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectAll" resultMap="RoleResultMap">
   	select
   	<include refid="Base_Column_List"/>
   	from t_role
   	where id != 1
+  </select>
+  <resultMap id="RoleResultMap" type="com.hirain.web.ssm.entity.Role">
+  	<id property="id" column="id" jdbcType="BIGINT"></id>
+  	<result column="rolename" jdbcType="VARCHAR" property="rolename"/>
+  	<result column="cname" jdbcType="VARCHAR" property="cname"/>
+  	<result column="description" jdbcType="VARCHAR" property="description"/>
+  	<collection property="permissionList" ofType="com.hirain.web.ssm.entity.Permission" column="id" select="selectPermission"></collection>
+  </resultMap>
+  <select id="selectPermission" parameterType="java.lang.Long" resultType="com.hirain.web.ssm.entity.Permission">
+  	select * from t_permission where id in (select permission_id from t_role_permission where role_id=#{id,jdbcType=BIGINT})
   </select>
   <select id="selectPermissionOfRole" parameterType="java.lang.Long" resultType="java.lang.Long">
   	select permission_id

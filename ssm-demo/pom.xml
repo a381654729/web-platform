@@ -133,7 +133,12 @@
     <artifactId>cors-filter</artifactId>
     <version>2.5</version>
 </dependency>
-    
+
+    <dependency>
+    	<groupId>com.alibaba</groupId>
+    	<artifactId>druid</artifactId>
+    	<version>1.1.2</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>ssm-demo</finalName>

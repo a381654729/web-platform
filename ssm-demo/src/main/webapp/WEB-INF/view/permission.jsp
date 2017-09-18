@@ -31,7 +31,7 @@
             $('#update-modal').on('hidden.bs.modal', function () {
               $('#update-form input').val("");
               $('#update-form textarea').val("");
-              $('#tb_update').bootstrapTable('unCheckAll'); F
+              $('#tb_update').bootstrapTable('uncheckAll'); 
             });
           });
           function tableInit() {
@@ -51,7 +51,7 @@
               uniqueId: "id",
               columns: [
                 {
-                  checkbox: true
+                  radio: true
                 },
                 {
                   field: 'cname',
@@ -61,6 +61,20 @@
                 {
                   field: 'description',
                   title: '备注',
+                },
+                {
+                  field:'permissionList',
+                  title:'拥有权限',
+                  formatter:function(value,row,index){
+                    var str="";
+                    if(JSON.stringify(value)!='[]'){
+                      for(var i=0;i<value.length;i++){
+                        str=str+value[i].cname+',';
+                      }
+                      str=str.substr(0,str.length-1);
+                    }
+                    return str;
+                  }
                 }
               ]
             });
@@ -70,7 +84,7 @@
               dataType: 'json',
               sortable: false,
               queryParams: {},
-              striped: true,
+              striped: false,
               pagination: false,
               uniqueId: 'id',
               columns: [

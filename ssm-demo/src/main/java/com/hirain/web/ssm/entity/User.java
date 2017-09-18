@@ -73,4 +73,10 @@ public class User {
 		final String encryptPassword = passwordService.encryptPassword(password);
 		return encryptPassword;
 	}
+
+	public boolean isCorrectPassword(String inputPassword) {
+		final boolean isCorrectPassword = passwordService.passwordsMatch(inputPassword,
+				getPassword());
+		return isCorrectPassword;
+	}
 }

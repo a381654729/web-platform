@@ -32,6 +32,10 @@
                     <div class="box">
                       <div class="box-header">
                         <h3 class="box-title">柱状图</h3>
+                        <div class="box-tools pull-right">
+                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                          </button>
+                        </div>
                       </div>
                       <div class="box-body">
                         <!-- <button type="button" class="btn btn-default btn-flat" onclick="loadBar()">显示图形</button> -->
@@ -44,6 +48,10 @@
                     <div class="box">
                       <div class="box-header">
                         <h3 class="box-title">饼状图</h3>
+                        <div class="box-tools pull-right">
+                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                          </button>
+                        </div>
                       </div>
                       <div class="box-body">
                         <!-- <button type="button" class="btn btn-default btn-flat" onclick="loadPie()">显示图形</button> -->
@@ -58,6 +66,10 @@
                     <div class="box">
                       <div class="box-header">
                         <h3 class="box-title">折线图</h3>
+                        <div class="box-tools pull-right">
+                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                          </button>
+                        </div>
                       </div>
                       <div class="box-body">
                         <!-- <button type="button" class="btn btn-default btn-flat" onclick="loadLine()">显示图形</button> -->
@@ -70,6 +82,10 @@
                     <div class="box">
                       <div class="box-header">
                         <h3 class="box-title">地图</h3>
+                        <div class="box-tools pull-right">
+                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                          </button>
+                        </div>
                       </div>
                       <div class="box-body">
                         <!-- <button type="button" class="btn btn-default btn-flat" onclick="loadMap()">显示图形</button> -->
@@ -84,6 +100,10 @@
                     <div class="box">
                       <div class="box-header">
                         <h3 class="box-title">仪表盘</h3>
+                        <div class="box-tools pull-right">
+                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                          </button>
+                        </div>
                       </div>
                       <div class="box-body">
                         <!-- <button type="button" class="btn btn-default btn-flat" onclick="loadGauge()">显示图形</button> -->
@@ -96,6 +116,10 @@
                     <div class="box">
                       <div class="box-header">
                         <h3 class="box-title">阶梯图</h3>
+                        <div class="box-tools pull-right">
+                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                          </button>
+                        </div>
                       </div>
                       <div class="box-body">
                         <!-- <button type="button" class="btn btn-default btn-flat" onclick="loadStep()">显示图形</button> -->
